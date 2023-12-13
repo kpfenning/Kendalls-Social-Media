@@ -22,6 +22,7 @@ const thoughtController = {
              select: "-__v",
          })
          .select('-__v')
+         .sort({ _id: -1 })
          .then(dbThoughtData => {
             if (!dbThoughtData) {
                 return res.status(404).json({ message: 'No thought found with this id' });
