@@ -1,5 +1,6 @@
 const { User, Thought } = require('../models');
 
+
 const userController = {
     getAllUsers(res, req) {
         User.find({})
@@ -12,7 +13,7 @@ const userController = {
             .then((dbUserData) => res.json(dbUserData))
             .catch((err) => {
                 console.log(err);
-                 res.status(400).json(err);
+                 res.sendStatus(400);
              });
     },
     getUserById({ params }, res) {
@@ -34,7 +35,7 @@ const userController = {
              })
              .catch(err => {
                 console.log(err);
-                 res.status(400).json(err);
+                 res.sendStatus(400);
              });
     },
     createUser({ body }, res) {
