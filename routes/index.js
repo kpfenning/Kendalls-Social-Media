@@ -4,7 +4,7 @@ const apiRoutes = require('./api');
 router.use('/api', apiRoutes);
 
 router.use((req, res) => {
-    res.status(404).json({ message: 'ERROR :(' })
+    return res.send('no route');
 });
 
 module.exports = router;
