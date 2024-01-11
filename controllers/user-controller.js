@@ -2,20 +2,13 @@ const { User, Thought } = require('../models');
 
 
 const userController = {
-    getAllUsers(res, req) {
+    getAllUsers(req, res) {
         User.find({})
-        .populate({
-            path: 'thoughts',
-            select: '-__v',
-        })
-            .select('-__v')
-            .sort({ _id: -1 })
-            .then((dbUserData) => res.json(dbUserData))
-            .catch((err) => {
-                console.log(err);
-                 res.sendStatus(400);
-             });
+            .then((user) => res.json(user))
+            .catch((err) => res.status(500).json(err));
     },
+
+    
     getUserById({ params }, res) {
         User.findOne({ _id: params.id })
             .populate({
