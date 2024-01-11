@@ -8,34 +8,28 @@ const userController = {
             .catch((err) => res.status(500).json(err));
     },
 
-    
-    getUserById({ params }, res) {
-        User.findOne({ _id: params.id })
-            .populate({
-                path: 'thoughts',
-                select: '-__v',
-            })
-            .populate({
-                path: 'friends',
-                 select: '-__v',
-             })
-             .then(dbUserData => {
-                if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with this id' });
-                    return;
+    getUserById(req,res) {
+        User.findOne({ _id: req.params.userId })
+            .populate("thoughts")
+            .populate("friends")
+            .select("-__v")
+            .then((user) => {
+                if (!user) {
+                    res.status(404).json({ message: "No user found with this id"});
+                } else {
+                    res.json(user)
                 }
-                res.json(dbUserData);
-             })
-             .catch(err => {
-                console.log(err);
-                 res.sendStatus(400);
-             });
+            })
+            .catch((err) => res.status(500).json(err));
+                
     },
-    createUser({ body }, res) {
-        User.create(body)
-        .then(dbUserData => res.json(dbUserData))
+    createUser(req, res) {
+        User.create(req.body)
+        .then((user) => res.json(user))
         .catch(err => res.json(err));
     },
+
+
     updateUser({ params, body }, res) {
         User.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
         .then(dbUserData => {
