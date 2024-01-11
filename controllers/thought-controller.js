@@ -11,6 +11,12 @@ const thoughtController = {
         });
     },
 
+    createThought(req, res) {
+        Thought.create(req.body)
+            .then((user) => res.json(user))
+            .catch((err) => res.status(500).json(err));
+    },
+
     getThoughtById(req,res) {
         Thought.findOne({ _id: req.params.thoughtId })
             .select('-__v')
@@ -24,11 +30,7 @@ const thoughtController = {
             .catch((err) => res.status(500).json(err));
     },
 
-    createThought(req, res) {
-        Thought.create(req.body)
-            .then((user) => res.json(user))
-            .catch((err) => res.status(500).json(err));
-    },
+    
     
     updateThought(req,res) {
         Thought.findOneAndUpdate({ _id: req.params.thoughtId }, { $set: req.body }, { new: true, runValidators: true })

@@ -11,5 +11,5 @@ connection.on('connected', () => {
     console.log('MongoDB connected')
 });
 
-module.exports = connection;
+module.exports = { connect, connection}
 
