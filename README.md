@@ -10,6 +10,8 @@ In order to install this onto your own device, you will need to clone the reposi
 
 ## Usage
 
+Link to Demo video! https://drive.google.com/file/d/112dRfPOghFEFYNxOKF3F2q0rSFhTRoLS/view 
+
 In order to test that it is working properly, you will go into Insominia and the following calls to find the data:
 
 `/api/users`
